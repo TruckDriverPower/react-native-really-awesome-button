@@ -264,9 +264,9 @@ export default class Button extends React.Component {
         }
       );
     }
-    if (this.props.onPress) {
-      this.props.onPress(this.end);
-    }
+//     if (this.props.onPress) {
+//       this.props.onPress(this.end);
+//     }
   };
 
   end = callback => {
@@ -430,6 +430,7 @@ export default class Button extends React.Component {
       <TouchableWithoutFeedback
         testID="aws-btn-content-view"
         onPressIn={this.pressIn}
+        onPress={this.props.onPress}
         onPressOut={this.pressOut}
       >
         <Animated.View
