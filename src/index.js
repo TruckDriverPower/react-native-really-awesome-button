@@ -182,7 +182,7 @@ export default class Button extends React.Component {
   }
 
   pressIn = () => {
-    if (this.props.disabled === true || !this.props.children || this.animating === true) {
+    if (this.props.disabled === true || !this.props.children) {
       return false
     }
     this.pressing = true
@@ -225,6 +225,7 @@ export default class Button extends React.Component {
     if (this.props.disabled) return
     this.animating = true
 
+    this.pressIn()
     if (this.props.progress === true) {
       this.setState({ activity: true }, () => {
         this.animateLoadingStart()
@@ -243,15 +244,14 @@ export default class Button extends React.Component {
       })
     }
     // this.props.onPress(this.end)
-    if (this.props.onPress) {
-      this.props.onPress(this.end)
-    }
+    if (this.props.onPress) this.props.onPress(this.end)
+    this.release()
   }
 
   end = callback => {
-    // if (this.props.progress !== true) {
-    //   return
-    // }
+    if (this.props.progress !== true) {
+      return
+    }
     if (this.timeout) {
       clearTimeout(this.timeout)
     }
